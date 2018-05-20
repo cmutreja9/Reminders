@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let image = UIImage(named: "profile-default.jpg")
+        let imageData:NSData = UIImageJPEGRepresentation(image!, 1.0)! as NSData
+        
+        UserDefaults.standard.set(imageData,forKey: "userProfilePic")
+        UserDefaults.standard.set("Chiku",forKey: "userName")
+        UserDefaults.standard.set("Be you the world will adjust.",forKey:"userQuote")
+        UserDefaults.standard.set(false,forKey:"QuoteON")
+        
+        let center = UNUserNotificationCenter.current()
+        center.delegate = self as? UNUserNotificationCenterDelegate
+        
+        
         return true
     }
 

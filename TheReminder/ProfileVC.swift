@@ -10,10 +10,24 @@ import UIKit
 
 class ProfileVC: UIViewController {
 
+    @IBOutlet weak var profilePic: UIImageView!
+    
+    @IBOutlet weak var userName: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let imageData = UserDefaults.standard.object(forKey: "userProfilePic") as! NSData
+        profilePic.image = UIImage(data: imageData as Data)
+        profilePic.layer.cornerRadius = profilePic.frame.size.width/2;
+        profilePic.clipsToBounds = true;
+        profilePic.layer.borderColor = UIColor.clear.cgColor;
+        profilePic.layer.borderWidth = 2;
 
         // Do any additional setup after loading the view.
+        
+        let name = UserDefaults.standard.object(forKey: "userName") as? String
+        userName.text = name
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,5 +45,16 @@ class ProfileVC: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    /*override func prepare(for segue:UIStoryboardSegue,sender:Any?){
+        if  segue.identifier == "editProfile"{
+        
+            let editProfilePicture = segue.destination as! EditProfilePic;
+            //var image = UIImage(named: "profile-default")
+            //editProfilePicture.editpic.image = UIImage(named: "myprofile")
+           
+            
+        }
+    }*/
 
 }
